@@ -50,12 +50,9 @@ public class ConsultarPaciente extends javax.swing.JFrame {
             tableC.setValueAt(tab.getNome(), i, 1);
             tableC.setValueAt(tab.getIdade(), i, 2);
             tableC.setValueAt(tab.getSUS(), i, 3);
-            tableC.setValueAt(tab.getDatacad(), i, 4);
-            tableC.setValueAt(tab.getDatacons(), i, 5);
-            tableC.setValueAt(tab.getConsulta(), i, 6);
-            tableC.setValueAt(tab.getCpf(), i, 7);
-            tableC.setValueAt(tab.getResponsavel(), i, 8);
-            tableC.setValueAt(tab.getSexo(), i, 9);
+            tableC.setValueAt(tab.getCpf(), i, 4);
+            tableC.setValueAt(tab.getResponsavel(), i, 5);
+            tableC.setValueAt(tab.getSexo(), i, 6);
             i++;
         }
         
@@ -85,11 +82,11 @@ public class ConsultarPaciente extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Código", "Nome do Paciente", "Idade", "SUS", "CPF", "Sexo", "Responsavel", "Data de Cadastro", "Data da Consulta", "Consulta(Especialista)"
+                "Código", "Nome do Paciente", "Idade", "SUS", "CPF", "Responsável", "Sexo"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {

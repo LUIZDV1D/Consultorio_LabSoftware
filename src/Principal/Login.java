@@ -5,6 +5,8 @@
  */
 package Principal;
 
+import DAO.AdministradorDAO;
+import DAO.Conexao;
 import java.sql.Connection;
 import javax.swing.JOptionPane;
 
@@ -20,7 +22,7 @@ public class Login extends javax.swing.JFrame {
     public Login() {
         initComponents();
         setLocationRelativeTo(this);
-        
+        setSize(620,498);
     }
 
     /**
@@ -63,23 +65,23 @@ public class Login extends javax.swing.JFrame {
             }
         });
         jPanel1.add(sair);
-        sair.setBounds(310, 330, 120, 57);
+        sair.setBounds(330, 330, 120, 57);
 
         jLabel1.setFont(new java.awt.Font("Nirmala UI Semilight", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Usuário:");
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(100, 230, 60, 15);
+        jLabel1.setBounds(120, 230, 60, 15);
 
         jLabel2.setFont(new java.awt.Font("Nirmala UI", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Senha:");
         jPanel1.add(jLabel2);
-        jLabel2.setBounds(100, 290, 60, 15);
+        jLabel2.setBounds(120, 290, 60, 15);
         jPanel1.add(user);
-        user.setBounds(160, 220, 272, 40);
+        user.setBounds(180, 220, 272, 40);
         jPanel1.add(pass);
-        pass.setBounds(160, 280, 272, 42);
+        pass.setBounds(180, 280, 272, 42);
 
         entrar.setBackground(new java.awt.Color(86, 97, 215));
         entrar.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
@@ -92,15 +94,16 @@ public class Login extends javax.swing.JFrame {
             }
         });
         jPanel1.add(entrar);
-        entrar.setBounds(160, 330, 127, 57);
+        entrar.setBounds(180, 330, 127, 57);
 
-        bprog.setBackground(new java.awt.Color(254, 117, 50));
+        bprog.setBackground(new java.awt.Color(0, 0, 153));
+        bprog.setForeground(new java.awt.Color(255, 255, 255));
         jPanel1.add(bprog);
-        bprog.setBounds(100, 410, 350, 14);
+        bprog.setBounds(130, 400, 350, 20);
 
         jLabel4.setIcon(new javax.swing.ImageIcon("C:\\Users\\Pedro Alcantara\\Pictures\\Nova pasta\\LOGO.png")); // NOI18N
         jPanel1.add(jLabel4);
-        jLabel4.setBounds(190, -10, 230, 230);
+        jLabel4.setBounds(210, 0, 230, 230);
 
         jLabel5.setFont(new java.awt.Font("Yokelvision", 1, 11)); // NOI18N
         jLabel5.setIcon(new javax.swing.ImageIcon("C:\\Users\\Pedro Alcantara\\Pictures\\Nova pasta\\equipe medica para funo.png")); // NOI18N
@@ -120,21 +123,47 @@ public class Login extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 605, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 591, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 398, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 438, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void entrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entrarActionPerformed
-        new home().setVisible(true);
-        dispose();
+        Connection con = Conexao.AbrirConexao();
+        AdministradorDAO sql = new AdministradorDAO(con);
+        String login = user.getText();
+        String senha = pass.getText();
+        
+        if (login.equalsIgnoreCase("") || senha.equalsIgnoreCase("")) {
+            JOptionPane.showMessageDialog(null, "Nenhum campo pode está vazio", 
+                    "CONSULTÓRIO MÉDICO", JOptionPane.WARNING_MESSAGE);
+            user.setText("");
+            pass.setText("");
+        } else {
+            if (sql.Logar(login, senha) == true) {
+                new Thread() {
+                    public void run() {
+                        for (int i = 0; i < 101; i++) {
+                            bprog.setValue(i);
+                            
+                            try {
+                                Thread.sleep(30);
+                            } catch (Exception e) {
+                                e.getMessage();
+                            }
+                        }
+                        
+                        new home().setVisible(true);
+                        dispose();
+                    }
+                }.start();
+            }
+        }
     }//GEN-LAST:event_entrarActionPerformed
 
     private void sairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sairActionPerformed

@@ -20,7 +20,7 @@ public class Conexao extends ExecuteSQL{
             con = DriverManager.getConnection(url,"root","");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro na conexão com o banco", 
-                    "Vídeo Locadora", JOptionPane.ERROR_MESSAGE);
+                    "Centro Medico", JOptionPane.ERROR_MESSAGE);
             e.getMessage();
             
         }

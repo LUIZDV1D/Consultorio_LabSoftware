@@ -9,9 +9,6 @@ public class Paciente {
     private String Nome;
     private int Idade;
     private String SUS;
-    private String Datacad;
-    private String Datacons;
-    private String Consulta;
     private String Cpf;
     private String Responsavel;
     private String Sexo;
@@ -48,30 +45,6 @@ public class Paciente {
         this.SUS = SUS;
     }
 
-    public String getDatacad() {
-        return Datacad;
-    }
-
-    public void setDatacad(String Datacad) {
-        this.Datacad = Datacad;
-    }
-
-    public String getDatacons() {
-        return Datacons;
-    }
-
-    public void setDatacons(String Datacons) {
-        this.Datacons = Datacons;
-    }
-
-    public String getConsulta() {
-        return Consulta;
-    }
-
-    public void setConsulta(String Consulta) {
-        this.Consulta = Consulta;
-    }
-
     public String getCpf() {
         return Cpf;
     }
@@ -96,5 +69,5 @@ public class Paciente {
         this.Sexo = Sexo;
     }
 
-    
+  
 }

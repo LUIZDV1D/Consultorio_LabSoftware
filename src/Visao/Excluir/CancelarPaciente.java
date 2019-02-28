@@ -18,12 +18,12 @@ import javax.swing.JOptionPane;
  *
  * @author Pedro Alcantara
  */
-public class CancelarConsulta extends javax.swing.JFrame {
+public class CancelarPaciente extends javax.swing.JFrame {
 
     /**
      * Creates new form CancelarConsulta
      */
-    public CancelarConsulta() {
+    public CancelarPaciente() {
         initComponents();
         setSize(710,390);
         setLocationRelativeTo(this);
@@ -68,7 +68,7 @@ public class CancelarConsulta extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Arial Black", 0, 36)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 102));
-        jLabel2.setText("CANCELAMENTO DE CONSULTA");
+        jLabel2.setText("CANCELAMENTO DE PACIENTE");
         getContentPane().add(jLabel2);
         jLabel2.setBounds(30, 10, 670, 70);
 
@@ -116,7 +116,7 @@ public class CancelarConsulta extends javax.swing.JFrame {
         jButton1.setBounds(80, 210, 120, 70);
 
         jButton2.setBackground(new java.awt.Color(0, 204, 0));
-        jButton2.setText("APAGAR CONSULTA");
+        jButton2.setText("APAGAR PACIENTE");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -186,6 +186,7 @@ public class CancelarConsulta extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         new home().setVisible(true);
+        dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -205,20 +206,21 @@ public class CancelarConsulta extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CancelarConsulta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CancelarPaciente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CancelarConsulta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CancelarPaciente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CancelarConsulta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CancelarPaciente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CancelarConsulta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CancelarPaciente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CancelarConsulta().setVisible(true);
+                new CancelarPaciente().setVisible(true);
             }
         });
     }

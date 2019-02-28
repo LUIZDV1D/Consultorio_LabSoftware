@@ -42,8 +42,6 @@ public class CadastrarPaciente extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
@@ -51,16 +49,12 @@ public class CadastrarPaciente extends javax.swing.JFrame {
         jTF_Idade = new javax.swing.JTextField();
         jTF_Resp = new javax.swing.JTextField();
         jTF_Sexo = new javax.swing.JTextField();
-        jTF_Consulta = new javax.swing.JTextField();
-        jLabel11 = new javax.swing.JLabel();
-        jTF_Data = new javax.swing.JFormattedTextField();
-        jTF_Datacons = new javax.swing.JFormattedTextField();
         jTF_SUS = new javax.swing.JFormattedTextField();
         jTF_CPF = new javax.swing.JFormattedTextField();
-        jLabel10 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jLabel10 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -104,61 +98,37 @@ public class CadastrarPaciente extends javax.swing.JFrame {
         jPanel2.add(jLabel4);
         jLabel4.setBounds(10, 120, 70, 14);
 
-        jLabel5.setText("Data:");
-        jPanel2.add(jLabel5);
-        jLabel5.setBounds(20, 150, 50, 30);
-
-        jLabel6.setText("Data Cons. :");
-        jPanel2.add(jLabel6);
-        jLabel6.setBounds(1, 190, 80, 20);
-
         jLabel7.setText("CPF :");
         jPanel2.add(jLabel7);
-        jLabel7.setBounds(16, 234, 50, 20);
+        jLabel7.setBounds(10, 160, 50, 20);
 
         jLabel8.setText("Responsavel:");
         jPanel2.add(jLabel8);
-        jLabel8.setBounds(15, 270, 80, 30);
+        jLabel8.setBounds(10, 190, 80, 30);
 
         jLabel9.setText("Sexo :");
         jPanel2.add(jLabel9);
-        jLabel9.setBounds(11, 310, 50, 30);
+        jLabel9.setBounds(10, 230, 50, 30);
         jPanel2.add(jTF_Nome);
         jTF_Nome.setBounds(80, 30, 468, 30);
-        jPanel2.add(jTF_Idade);
-        jTF_Idade.setBounds(80, 70, 468, 30);
-        jPanel2.add(jTF_Resp);
-        jTF_Resp.setBounds(100, 270, 450, 30);
-        jPanel2.add(jTF_Sexo);
-        jTF_Sexo.setBounds(80, 310, 469, 30);
 
-        jTF_Consulta.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTF_ConsultaActionPerformed(evt);
+        jTF_Idade.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTF_IdadeKeyReleased(evt);
             }
         });
-        jPanel2.add(jTF_Consulta);
-        jTF_Consulta.setBounds(80, 350, 470, 30);
+        jPanel2.add(jTF_Idade);
+        jTF_Idade.setBounds(80, 70, 468, 30);
 
-        jLabel11.setText("Consulta:");
-        jPanel2.add(jLabel11);
-        jLabel11.setBounds(0, 354, 70, 20);
-
-        try {
-            jTF_Data.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        jPanel2.add(jTF_Data);
-        jTF_Data.setBounds(79, 150, 470, 30);
-
-        try {
-            jTF_Datacons.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        jPanel2.add(jTF_Datacons);
-        jTF_Datacons.setBounds(80, 190, 470, 30);
+        jTF_Resp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTF_RespActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jTF_Resp);
+        jTF_Resp.setBounds(100, 190, 450, 30);
+        jPanel2.add(jTF_Sexo);
+        jTF_Sexo.setBounds(80, 230, 469, 30);
 
         try {
             jTF_SUS.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("### #### #### ####")));
@@ -174,14 +144,7 @@ public class CadastrarPaciente extends javax.swing.JFrame {
             ex.printStackTrace();
         }
         jPanel2.add(jTF_CPF);
-        jTF_CPF.setBounds(80, 230, 470, 30);
-
-        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/Clinica-Medica.jpeg"))); // NOI18N
-        jPanel2.add(jLabel10);
-        jLabel10.setBounds(0, 10, 630, 690);
-
-        getContentPane().add(jPanel2);
-        jPanel2.setBounds(0, 100, 620, 410);
+        jTF_CPF.setBounds(80, 150, 470, 30);
 
         jButton1.setText("Voltar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -218,8 +181,15 @@ public class CadastrarPaciente extends javax.swing.JFrame {
                 .addGap(37, 37, 37))
         );
 
-        getContentPane().add(jPanel3);
-        jPanel3.setBounds(0, 510, 620, 90);
+        jPanel2.add(jPanel3);
+        jPanel3.setBounds(0, 300, 620, 90);
+
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/Clinica-Medica.jpeg"))); // NOI18N
+        jPanel2.add(jLabel10);
+        jLabel10.setBounds(0, 10, 630, 690);
+
+        getContentPane().add(jPanel2);
+        jPanel2.setBounds(0, 100, 620, 410);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -228,19 +198,14 @@ public class CadastrarPaciente extends javax.swing.JFrame {
         String nome = jTF_Nome.getText();
         String idade = jTF_Idade.getText();
         String sus = jTF_SUS.getText();
-        String datacad = jTF_Data.getText();
-        String datacons = jTF_Datacons.getText();
-        String consulta = jTF_Consulta.getText();
         String cpf = jTF_CPF.getText();
         String responsavel = jTF_Resp.getText();
         String sexo = jTF_Sexo.getText();
         
-        if (nome.equals("") || idade.equals("") || sus.equals("") || datacad.equals("")
-                || datacons.equals("") || consulta.equals("") || cpf.equals("")
-                || responsavel.equals("") || sexo.equals("")) {
+        if (nome.equals("") || idade.equals("") || sus.equals("") || cpf.equals("") || responsavel.equals("") || sexo.equals("")) {
             
             JOptionPane.showMessageDialog(null, "Nenhum campo está vazio", 
-                    "Vídeo Locadora", JOptionPane.WARNING_MESSAGE);
+                    "Centro Medico", JOptionPane.WARNING_MESSAGE);
         } else {
             Connection con = Conexao.AbrirConexao();
             PacienteDAO sql = new PacienteDAO(con);
@@ -250,9 +215,6 @@ public class CadastrarPaciente extends javax.swing.JFrame {
             a.setNome(nome);
             a.setIdade(n);
             a.setSUS(sus);
-            a.setDatacad(datacad);
-            a.setDatacons(datacons);
-            a.setConsulta(consulta);
             a.setCpf(cpf);
             a.setResponsavel(responsavel);
             a.setSexo(sexo);
@@ -263,30 +225,40 @@ public class CadastrarPaciente extends javax.swing.JFrame {
             
             jTF_Nome.setText("");
             jTF_Idade.setText("");
-            jTF_Data.setText("");
-            jTF_Datacons.setText("");
             jTF_SUS.setText("");
             jTF_Sexo.setText("");
             jTF_CPF.setText("");
-            jTF_Consulta.setText("");
             jTF_Resp.setText("");
             
             
             JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso",
-                    "Vídeo Locadora", JOptionPane.INFORMATION_MESSAGE);
+                    "Centro Medico", JOptionPane.INFORMATION_MESSAGE);
             dispose();
             new home().setVisible(true);
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jTF_ConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTF_ConsultaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTF_ConsultaActionPerformed
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         new home().setVisible(true);
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jTF_RespActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTF_RespActionPerformed
+
+    }//GEN-LAST:event_jTF_RespActionPerformed
+
+    private void jTF_IdadeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTF_IdadeKeyReleased
+        
+        int i = Integer.parseInt(jTF_Idade.getText());
+        
+        if(i > 17){
+            jTF_Resp.disable();
+        }else{
+            jTF_Resp.enable();
+        }
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTF_IdadeKeyReleased
 
     /**
      * @param args the command line arguments
@@ -328,12 +300,9 @@ public class CadastrarPaciente extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
@@ -341,9 +310,6 @@ public class CadastrarPaciente extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JFormattedTextField jTF_CPF;
-    private javax.swing.JTextField jTF_Consulta;
-    private javax.swing.JFormattedTextField jTF_Data;
-    private javax.swing.JFormattedTextField jTF_Datacons;
     private javax.swing.JTextField jTF_Idade;
     private javax.swing.JTextField jTF_Nome;
     private javax.swing.JTextField jTF_Resp;

@@ -25,7 +25,7 @@ public class PacienteDAO extends ExecuteSQL {
     
    
     public String Inserir_Paciente(Paciente a) {
-        String sql = "insert into paciente values(0,?,?,?,?,?,?,?,?,?)";
+        String sql = "insert into paciente values(0,?,?,?,?,?,?)";
         
         try {
             PreparedStatement ps = getCon().prepareStatement(sql);
@@ -33,12 +33,9 @@ public class PacienteDAO extends ExecuteSQL {
             ps.setString(1, a.getNome());
             ps.setInt(2, a.getIdade());
             ps.setString(3, a.getSUS());
-            ps.setString(4, a.getDatacad());
-            ps.setString(5, a.getDatacons());
-            ps.setString(6, a.getConsulta());
-            ps.setString(7, a.getCpf());
-            ps.setString(8, a.getResponsavel());
-            ps.setString(9, a.getSexo());
+            ps.setString(4, a.getCpf());
+            ps.setString(5, a.getResponsavel());
+            ps.setString(6, a.getSexo());
             
             
             if (ps.executeUpdate() > 0) {
@@ -56,7 +53,7 @@ public class PacienteDAO extends ExecuteSQL {
     
    
     public List<Paciente> ListarPaciente() {
-        String sql = "select id,nome,idade,sus,data_cad,data_cons,consulta,cpf,responsavel,sexo from paciente";
+        String sql = "select id,nome,idade,sus,cpf,responsavel,sexo from paciente";
         List<Paciente> lista = new ArrayList<>();
         
         try {
@@ -70,12 +67,9 @@ public class PacienteDAO extends ExecuteSQL {
                     a.setNome(rs.getString(2));
                     a.setIdade(rs.getInt(3));
                     a.setSUS(rs.getString(4));
-                    a.setDatacad(rs.getString(5));
-                    a.setDatacons(rs.getString(6));
-                    a.setConsulta(rs.getString(7));
-                    a.setCpf(rs.getString(8));
-                    a.setResponsavel(rs.getString(9));
-                    a.setSexo(rs.getString(10));
+                    a.setCpf(rs.getString(5));
+                    a.setResponsavel(rs.getString(6));
+                    a.setSexo(rs.getString(7));
                     
                     lista.add(a);
                 }
@@ -94,7 +88,7 @@ public class PacienteDAO extends ExecuteSQL {
    
     public String Alterar_Paciente(Paciente a) {
         String sql = "update paciente set nome = ?, idade = ?, sus = ?"
-                + ", data_cad = ?, data_cons = ?, consulta = ?, cpf = ?, responsavel = ?"
+                + ", cpf = ?, responsavel = ?"
                 + ", sexo = ? where id = ?";
         
         try {
@@ -102,12 +96,10 @@ public class PacienteDAO extends ExecuteSQL {
             ps.setString(1, a.getNome());
             ps.setInt(2, a.getIdade());
             ps.setString(3, a.getSUS());
-            ps.setString(4, a.getDatacad());
-            ps.setString(5, a.getDatacons());
-            ps.setString(6, a.getConsulta());
-            ps.setString(7, a.getCpf());
-            ps.setString(8, a.getResponsavel());
-            ps.setString(9, a.getSexo());
+            ps.setString(4, a.getCpf());
+            ps.setString(5, a.getResponsavel());
+            ps.setString(6, a.getSexo());
+            ps.setInt(7, a.getId());
 
             
             if (ps.executeUpdate() > 0) {
@@ -174,6 +166,54 @@ public class PacienteDAO extends ExecuteSQL {
                 while (rs.next()) {                    
                     Paciente a = new Paciente();
                     a.setId(rs.getInt(1));
+                    lista.add(a);
+                }
+                return lista;
+            } else {
+                return null;
+            }
+        } catch (Exception e) {
+            return null;
+        }
+    }
+    public boolean testar_Paciente(int cod) {
+        boolean Resultado = false;
+        
+        try {
+            String sql = "select * from paciente where id = " + cod + "";
+            PreparedStatement ps = getCon().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            
+            if (rs != null) {
+                while (rs.next()) {                    
+                    Resultado = true;
+                }
+            }
+        } catch (Exception e) {
+            e.getMessage();
+        }
+        
+        return Resultado;
+    }
+    public List<Paciente> CapturarPacientes(int cod) {
+        String sql = "select * from paciente where id =" + cod + " ";
+        List<Paciente> lista = new ArrayList<>();
+        
+        try {
+            PreparedStatement ps = getCon().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            
+            if (rs != null) {
+                while (rs.next()) {                    
+                    Paciente a = new Paciente();
+                    a.setId(rs.getInt(1));
+                    a.setNome(rs.getString(2));
+                    a.setIdade(rs.getInt(3));
+                    a.setSUS(rs.getString(4));
+                    a.setCpf(rs.getString(5));
+                    a.setResponsavel(rs.getString(6));
+                    a.setSexo(rs.getString(7));
+
                     lista.add(a);
                 }
                 return lista;

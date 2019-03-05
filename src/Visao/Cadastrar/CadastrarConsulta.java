@@ -12,7 +12,12 @@ import Modelo.Consulta;
 import Modelo.Paciente;
 import Principal.home;
 import java.sql.Connection;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -44,6 +49,8 @@ public class CadastrarConsulta extends javax.swing.JFrame {
         
         Conexao.FecharConexao(con);
     }
+        
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -132,6 +139,11 @@ public class CadastrarConsulta extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        jTF_DataCad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTF_DataCadActionPerformed(evt);
+            }
+        });
         jPanel2.add(jTF_DataCad);
         jTF_DataCad.setBounds(160, 70, 180, 30);
 
@@ -250,6 +262,11 @@ public class CadastrarConsulta extends javax.swing.JFrame {
         
         Conexao.FecharConexao(con);
     }//GEN-LAST:event_CombopaActionPerformed
+
+    private void jTF_DataCadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTF_DataCadActionPerformed
+       
+
+    }//GEN-LAST:event_jTF_DataCadActionPerformed
 
     /**
      * @param args the command line arguments

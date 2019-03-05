@@ -112,6 +112,11 @@ public class CadastrarPaciente extends javax.swing.JFrame {
         jPanel2.add(jTF_Nome);
         jTF_Nome.setBounds(80, 30, 468, 30);
 
+        jTF_Idade.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTF_IdadeActionPerformed(evt);
+            }
+        });
         jTF_Idade.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jTF_IdadeKeyReleased(evt);
@@ -259,6 +264,10 @@ public class CadastrarPaciente extends javax.swing.JFrame {
 
         // TODO add your handling code here:
     }//GEN-LAST:event_jTF_IdadeKeyReleased
+
+    private void jTF_IdadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTF_IdadeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTF_IdadeActionPerformed
 
     /**
      * @param args the command line arguments

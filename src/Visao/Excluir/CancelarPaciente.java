@@ -166,10 +166,10 @@ public class CancelarPaciente extends javax.swing.JFrame {
         
         if (nome.equals("")) {
             JOptionPane.showMessageDialog(null, "Nenhum nome selecionado",
-                    "Vídeo Locadora", JOptionPane.WARNING_MESSAGE);
+                    "Centro Medico", JOptionPane.WARNING_MESSAGE);
         } else {
             int b = JOptionPane.showConfirmDialog(null, "Deseja realmente excluir"
-                    + "\n ( " + codigo + " ) ( " + nome + " ) ", "Vídeo Locadora",
+                    + "\n ( " + codigo + " ) ( " + nome + " ) ", "Centro Medico",
                     JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
             
             if (b == 0) {

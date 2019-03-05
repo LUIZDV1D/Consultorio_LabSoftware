@@ -61,8 +61,8 @@ public class ConsultaDAO extends ExecuteSQL{
                 while (rs.next()) {                    
                     Consulta a = new Consulta();
                     a.setId(rs.getInt(1));
-                    a.setNome(rs.getString(2));
-                    a.setIdp(rs.getInt(3));
+                    a.setNome(rs.getString(3));
+                    a.setIdp(rs.getInt(2));
                     a.setDatacad(rs.getString(4));
                     a.setDatacons(rs.getString(5));
                     a.setMedico(rs.getString(6));
@@ -131,7 +131,7 @@ public class ConsultaDAO extends ExecuteSQL{
     
     
     public String Excluir_Consulta(Consulta a) {
-        String sql = "delete from consulta where id = ? and nome = ? ";
+        String sql = "delete from consulta where id = ? and paciente = ? ";
         
         try {
             PreparedStatement ps = getCon().prepareStatement(sql);
@@ -218,4 +218,37 @@ public class ConsultaDAO extends ExecuteSQL{
             return null;
         }
     }
+    
+    public List<Consulta> ListarConsultaCod(int cod) {
+        String sql = "select id,idpaciente,paciente,datacad,datacons,medico from consulta where idpaciente ='"+cod+"'";
+        List<Consulta> lista = new ArrayList<>();
+        
+        try {
+            PreparedStatement ps = getCon().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            
+            if (ps != null) {
+                while (rs.next()) {                    
+                    Consulta a = new Consulta();
+                    a.setId(rs.getInt(1));
+                    a.setNome(rs.getString(3));
+                    a.setIdp(rs.getInt(2));
+                    a.setDatacad(rs.getString(4));
+                    a.setDatacons(rs.getString(5));
+                    a.setMedico(rs.getString(6));
+                    
+                    
+                    lista.add(a);
+                }
+                
+                return lista;
+            }else {
+                return null;
+            }
+            
+        } catch (Exception e) {
+            return null;
+        }
+    }
+    
 }

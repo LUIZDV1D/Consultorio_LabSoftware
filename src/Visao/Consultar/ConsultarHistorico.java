@@ -13,6 +13,8 @@ import Modelo.Paciente;
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -28,6 +30,7 @@ public class ConsultarHistorico extends javax.swing.JFrame {
         AtualizaCombo();
         setSize(902,520);
         setLocationRelativeTo(this);
+        AtualizaTable();
     }
     private void AtualizaCombo() {
         Connection con = Conexao.AbrirConexao();
@@ -42,6 +45,63 @@ public class ConsultarHistorico extends javax.swing.JFrame {
         
         Conexao.FecharConexao(con);
     }
+    
+    private void AtualizaTable() {
+        Connection con = Conexao.AbrirConexao();
+        ConsultaDAO bd = new ConsultaDAO(con);
+        List<Consulta> lista = new ArrayList<>();
+        lista = bd.ListarConsulta();
+        DefaultTableModel tbm = 
+                (DefaultTableModel) tableC.getModel();
+        
+        while (tbm.getRowCount() > 0) {            
+            tbm.removeRow(0);
+        }
+        
+        int i = 0;
+        
+        for (Consulta tab : lista) {
+            tbm.addRow(new String[i]);
+            tableC.setValueAt(tab.getIdp(), i, 0);
+            tableC.setValueAt(tab.getNome(), i, 1);
+            tableC.setValueAt(tab.getDatacons(), i, 2);
+            tableC.setValueAt(tab.getMedico(), i, 3);
+            i++;
+        }
+        
+        Conexao.FecharConexao(con);
+    }
+    
+    private void PesquisaCod() {
+        
+        String Cod = jTF_Idp.getText();
+        int cod = Integer.parseInt(Cod);
+        
+        Connection con = Conexao.AbrirConexao();
+        ConsultaDAO bd = new ConsultaDAO(con);
+        List<Consulta> lista = new ArrayList<>();
+        lista = bd.ListarConsultaCod(cod);
+        DefaultTableModel tbm = 
+                (DefaultTableModel) tableC.getModel();
+        
+        while (tbm.getRowCount() > 0) {            
+            tbm.removeRow(0);
+        }
+        
+        int i = 0;
+        
+        for (Consulta tab : lista) {
+            tbm.addRow(new String[i]);
+            tableC.setValueAt(tab.getIdp(), i, 0);
+            tableC.setValueAt(tab.getNome(), i, 1);
+            tableC.setValueAt(tab.getDatacons(), i, 2);
+            tableC.setValueAt(tab.getMedico(), i, 3);
+            i++;
+        }
+        
+        Conexao.FecharConexao(con);
+    }
+    
 
 
     /**
@@ -57,13 +117,13 @@ public class ConsultarHistorico extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
         Combopa = new javax.swing.JComboBox<>();
         jTF_Idp = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tableC = new javax.swing.JTable();
         jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -100,23 +160,6 @@ public class ConsultarHistorico extends javax.swing.JFrame {
         getContentPane().add(jPanel1);
         jPanel1.setBounds(0, 0, 900, 100);
 
-        jTable1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
-            },
-            new String [] {
-                "NOME DO PACIENTE", "CONSULTA", "DATA"
-            }
-        ));
-        jScrollPane1.setViewportView(jTable1);
-
-        getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(20, 170, 580, 240);
-
         Combopa.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         Combopa.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         Combopa.addActionListener(new java.awt.event.ActionListener() {
@@ -126,6 +169,8 @@ public class ConsultarHistorico extends javax.swing.JFrame {
         });
         getContentPane().add(Combopa);
         Combopa.setBounds(220, 120, 240, 30);
+
+        jTF_Idp.setEditable(false);
         getContentPane().add(jTF_Idp);
         jTF_Idp.setBounds(100, 120, 110, 30);
 
@@ -136,6 +181,11 @@ public class ConsultarHistorico extends javax.swing.JFrame {
         jButton1.setBackground(new java.awt.Color(255, 255, 255));
         jButton1.setText("PUXAR HISTÓRICO");
         jButton1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, null, new java.awt.Color(0, 0, 255), null, null));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton1);
         jButton1.setBounds(470, 120, 130, 30);
 
@@ -148,6 +198,22 @@ public class ConsultarHistorico extends javax.swing.JFrame {
         });
         getContentPane().add(jButton2);
         jButton2.setBounds(30, 420, 260, 50);
+
+        tableC.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Id Paciente", "Nome do Paciente", "Data", "Profissional"
+            }
+        ));
+        jScrollPane1.setViewportView(tableC);
+
+        getContentPane().add(jScrollPane1);
+        jScrollPane1.setBounds(10, 170, 610, 200);
 
         jLabel4.setIcon(new javax.swing.ImageIcon("C:\\Users\\Pedro Alcantara\\Pictures\\Nova pasta\\fundo historico.png")); // NOI18N
         jLabel4.setText("jLabel4");
@@ -177,6 +243,10 @@ Connection con = Conexao.AbrirConexao();
         new Principal.home().setVisible(true);
         dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    PesquisaCod();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -225,6 +295,6 @@ Connection con = Conexao.AbrirConexao();
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTF_Idp;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tableC;
     // End of variables declaration//GEN-END:variables
 }

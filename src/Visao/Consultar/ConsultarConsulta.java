@@ -4,37 +4,34 @@
  * and open the template in the editor.
  */
 package Visao.Consultar;
-import DAO.PacienteDAO;
+
 import DAO.Conexao;
-import Modelo.Paciente;
+import DAO.ConsultaDAO;
+import Modelo.Consulta;
 import Principal.home;
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Pedro Alcantara
  */
-public class ConsultarPaciente extends javax.swing.JFrame {
+public class ConsultarConsulta extends javax.swing.JFrame {
 
     /**
-     * Creates new form ConsultarPa
+     * Creates new form ConsultarConsulta
      */
-    public ConsultarPaciente() {
+    public ConsultarConsulta() {
         initComponents();
-        setLocationRelativeTo(this);
-        
-        setTitle("Centro Medico");
         AtualizaTable();
     }
-  
-    
     private void AtualizaTable() {
         Connection con = Conexao.AbrirConexao();
-        PacienteDAO bd = new PacienteDAO(con);
-        List<Paciente> lista = new ArrayList<>();
-        lista = bd.ListarPaciente();
+        ConsultaDAO bd = new ConsultaDAO(con);
+        List<Consulta> lista = new ArrayList<>();
+        lista = bd.ListarConsulta();
         DefaultTableModel tbm = 
                 (DefaultTableModel) tableC.getModel();
         
@@ -44,22 +41,19 @@ public class ConsultarPaciente extends javax.swing.JFrame {
         
         int i = 0;
         
-        for (Paciente tab : lista) {
+        for (Consulta tab : lista) {
             tbm.addRow(new String[i]);
             tableC.setValueAt(tab.getId(), i, 0);
-            tableC.setValueAt(tab.getNome(), i, 1);
-            tableC.setValueAt(tab.getIdade(), i, 2);
-            tableC.setValueAt(tab.getSUS(), i, 3);
-            tableC.setValueAt(tab.getCpf(), i, 4);
-            tableC.setValueAt(tab.getResponsavel(), i, 5);
-            tableC.setValueAt(tab.getSexo(), i, 6);
+            tableC.setValueAt(tab.getIdp(), i, 1);
+            tableC.setValueAt(tab.getNome(), i, 2);
+            tableC.setValueAt(tab.getDatacad(), i, 3);
+            tableC.setValueAt(tab.getDatacons(), i, 4);
+            tableC.setValueAt(tab.getMedico(), i, 5);
             i++;
         }
         
         Conexao.FecharConexao(con);
     }
-    
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -70,30 +64,12 @@ public class ConsultarPaciente extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tableC = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         jButton4 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tableC = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        tableC.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Código", "Nome do Paciente", "Idade", "SUS", "CPF", "Responsável", "Sexo"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane1.setViewportView(tableC);
 
         jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -109,24 +85,42 @@ public class ConsultarPaciente extends javax.swing.JFrame {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(337, 337, 337)
                 .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(412, 412, 412))
+                .addContainerGap(349, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(27, 27, 27)
+                .addGap(23, 23, 23)
                 .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
+
+        tableC.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Código", "Código Paciente", "Nome Paciente", "Data de Cadastro", "Data da Consulta", "Medico"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tableC);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1036, Short.MAX_VALUE)
+            .addComponent(jScrollPane1)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -135,7 +129,7 @@ public class ConsultarPaciente extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 373, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 323, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -145,7 +139,7 @@ public class ConsultarPaciente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-      
+
         new home().setVisible(true);
         dispose();
     }//GEN-LAST:event_jButton4ActionPerformed
@@ -167,23 +161,20 @@ public class ConsultarPaciente extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ConsultarPaciente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConsultarConsulta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ConsultarPaciente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConsultarConsulta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ConsultarPaciente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConsultarConsulta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ConsultarPaciente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConsultarConsulta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ConsultarPaciente().setVisible(true);
+                new ConsultarConsulta().setVisible(true);
             }
         });
     }
